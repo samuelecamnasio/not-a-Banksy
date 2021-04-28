@@ -3,7 +3,7 @@
 ## Interdisciplinary course of Design and Robotics
 9° edition, 2021
 
-
+---
 Laura Bonitta, school of Design
 
 Samuele Camnasio, school of Engineering
@@ -14,15 +14,16 @@ Pavel Popov, school of Engineering
 
 Hongwei Xu, school of Engineering
 
+---
 
-
-Supervising professors:
+### Supervising professors:
 
 Andrea Bonarini, DEIB department, Politecnico di Milano
 
 Maximiliano Romero , Design department, IUAV, Venice University
 
+---
 
-Supervising tutor:
+###Supervising tutor:
 
 Rohan Vangal
