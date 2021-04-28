@@ -24,6 +24,6 @@ Maximiliano Romero , Design department, IUAV, Venice University
 
 ---
 
-###Supervising tutor:
+### Supervising tutor:
 
 Rohan Vangal
