@@ -52,11 +52,11 @@ for (pos = 20; pos < 80; pos += 1)
   
     
 
-  //for (pos = 80; pos > 20; pos -= 1)
-    //{
-      //myservo.write(pos);
-      //delay(35);
-    //}
+  for (pos = 80; pos > 20; pos -= 1)
+    {
+      myservo.write(pos);
+      delay(35);
+    }
     
   }
     myservo.detach();  // set servo pin
