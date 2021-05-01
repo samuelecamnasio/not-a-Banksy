@@ -18,7 +18,7 @@ Servo headServo;  // create Servo object
 int slidingPos = 0;  //servo position
 int headPos = 0;  //servo position
 int basementPos = 0;  //servo position
-int relay = 51; // Out for light 
+int relay = 51; // relay to control the pump 
 
 #define TRIG_PIN_BACK 4
 #define ECHO_PIN_BACK 5
@@ -43,8 +43,7 @@ void setup() {
    pinMode(TRIG_PIN_FRONT, OUTPUT);   // set trigger pin to OUTPUT
   pinMode(ECHO_PIN_FRONT, INPUT);    // set echo pin to INPUT
   delay(50);
-  //int switchOneState = 0;         // current state of the switch
-  //int lastSwitchOneState = 0;     // previous state of the switch switch pins as an input
+
   pinMode(switchOnePin, INPUT);
   pinMode(relay, OUTPUT); 
   delay(50);
@@ -53,27 +52,26 @@ void setup() {
   delay(100);
   lastSwitchOneState = switchOneState;
   delay(50);
- if (switchOneState == HIGH) {  //outside
+ if (switchOneState == HIGH) {  //outside, set the robot in the correct position
     basementServo.attach(BASEMENT_MOTOR);  
     delay(100);
-    basementServo.write(180);
+    basementServo.write(180); //facing the people
     delay(4000);
     basementServo.detach();
   }
- else{
+ else{  //inside, set the robot in the correct position
     basementServo.attach(BASEMENT_MOTOR);  
     delay(100);
-    basementServo.write(0);
+    basementServo.write(0); //facing the wall
     delay(4000);
     basementServo.detach();
  }
 
  headServo.attach(HEAD_MOTOR);  
- headServo.write(80);              
+ headServo.write(80);              //head down
  delay(2000);                   
  headServo.detach();
  
-  //motors?
   delay(500);
  
 }
@@ -86,18 +84,15 @@ void loop() {
   delay(50);
 
  if (switchOneState == HIGH) {  //outside
-  if(switchOneState != lastSwitchOneState)
-  {
+  if(switchOneState != lastSwitchOneState)  //set position for the outside state
+  { 
       basementServo.attach(BASEMENT_MOTOR);  // set servo pin
         for (basementPos = 0; basementPos < 180; basementPos += 1) 
       {
         basementServo.write(basementPos);              
         delay(30);                
-      }
-     //   basementServo.write(180);  
-      //  delay(4000);
-        //delay(100);    
-        basementServo.detach();  // set 8 as servo pin, maybe not detach, TRY IT
+      }   
+        basementServo.detach();  // set servo pin
         delay(100);
   
   }
@@ -123,12 +118,12 @@ void loop() {
         Serial.println("OK");
         // Set volume to maximum (0 to 30).
         player.volume(30);
-        // Play the first MP3 file on the SD card
+        // Play MP3 file on the SD card
         player.play(5);
         delay(10000);
         headServo.attach(HEAD_MOTOR);  // set servo pin
         delay(100);
-        for (headPos = 80; headPos > 20; headPos -= 1)
+        for (headPos = 80; headPos > 20; headPos -= 1)  //raise head
         {
           headServo.write(headPos);
           delay(35);
@@ -158,14 +153,14 @@ void loop() {
           delay(30);
         }       
         delay(100);                   
-        basementServo.detach();  // set 8 as  servo pin, maybe not detach, TRY IT
+        basementServo.detach();  // set servo pin
         delay(100);
         //down head
-        headServo.attach(HEAD_MOTOR);  // set 8 as servo pin
+        headServo.attach(HEAD_MOTOR);  // set servo pin
         for (headPos = 20; headPos < 81; headPos += 1) 
         {
           headServo.write(headPos);              
-          delay(10);//faster?                   
+          delay(10);                   
         }
         delay(100);
         headServo.detach();
@@ -189,7 +184,7 @@ void loop() {
         player.play(5);
         delay(5000);
         //raise head
-        headServo.attach(HEAD_MOTOR);  // set 8 as servo pin
+        headServo.attach(HEAD_MOTOR);  // set servo pin
         delay(100);
         for (headPos = 80; headPos > 20; headPos -= 1)
         {
@@ -200,7 +195,7 @@ void loop() {
         headServo.detach();
 
         //turn body
-        basementServo.attach(BASEMENT_MOTOR);  // set 8 as servo pin
+        basementServo.attach(BASEMENT_MOTOR);  // set servo pin
         delay(100);
         for (basementPos = 135; basementPos < 180; basementPos += 1) 
         {
@@ -210,7 +205,7 @@ void loop() {
         basementServo.detach();
 
         //down board
-        slidingServo.attach(SLIDING_MOTOR);  // set 8 as servo pin
+        slidingServo.attach(SLIDING_MOTOR);  // set servo pin
         delay(100);
         slidingServo.write(0);
         delay(1900);
@@ -220,7 +215,7 @@ void loop() {
         delay(100);
 
         //down head
-        headServo.attach(HEAD_MOTOR);  // set 8 as servo pin
+        headServo.attach(HEAD_MOTOR);  // set servo pin
         delay(100);
         for (headPos = 20; headPos < 81; headPos += 1) 
         {
@@ -243,18 +238,15 @@ void loop() {
  }
   else  //inside
   {
-    if(switchOneState != lastSwitchOneState)
+    if(switchOneState != lastSwitchOneState)  //set position for the inside state
     {
-      basementServo.attach(BASEMENT_MOTOR);  // set 8 as servo pin
-      for (basementPos = 178; basementPos > 0; basementPos -= 1)
+      basementServo.attach(BASEMENT_MOTOR);  // set servo pin
+      for (basementPos = 178; basementPos > 0; basementPos -= 1)  //turn facing the wall
       {
         basementServo.write(basementPos);
         delay(30);
-      }
-      //basementServo.write(0);
-      //delay(4000);  
-      //delay(100);    
-      basementServo.detach();  // set 8 as servo pin, maybe not detach, TRY IT
+      } 
+      basementServo.detach();  // set servo pin
       delay(100);
     }
    digitalWrite(TRIG_PIN_BACK, LOW);
@@ -275,18 +267,6 @@ void loop() {
 
     if(distance<200)
     { 
-      //raise head
-      //headServo.attach(HEAD_MOTOR);  // set servo pin
-      //delay(100);
-      //for (headPos = 100; headPos > 20; headPos -= 1)
-        //{
-          //headServo.write(headPos);
-          //delay(35);
-        //}
-      //delay(50);
-      //headServo.detach();
-
-       //sneeze
       if (player.begin(softwareSerial)) {
 
         //turn body
@@ -297,7 +277,8 @@ void loop() {
             basementServo.write(basementPos);              
             delay(30);                
           }
-          basementServo.detach();    
+          basementServo.detach(); 
+         //sneeze   
         player.volume(30);
         player.play(1);//sneeze sound
         delay(1000);
@@ -326,7 +307,7 @@ void loop() {
           //start music
           // Set volume to maximum (0 to 30).
           player.volume(30);
-          // Play the first MP3 file on the SD card
+          // Play MP3 file on the SD card
           player.play(5);
           delay(10000);
           //turn body
@@ -339,15 +320,6 @@ void loop() {
           }
           basementServo.detach();        
 
-          //raise head
-          //headServo.attach(HEAD_MOTOR);  // set 8 as servo pin
-          //delay(100);
-          //for (headPos = 80; headPos > 20; headPos -= 1)
-          //{
-            //headServo.write(headPos);
-            //delay(35);
-          //}
-          //headServo.detach();
           delay(3000);
         delay(100);
         //raise board
@@ -370,7 +342,7 @@ void loop() {
         headServo.detach();
         delay(100);
         //down board
-        slidingServo.attach(SLIDING_MOTOR);  // set 8 as servo pin
+        slidingServo.attach(SLIDING_MOTOR);  // set servo pin
         delay(50);
         slidingServo.write(0);
         delay(1900);
@@ -380,14 +352,14 @@ void loop() {
         delay(100);
 
         //turn body
-        basementServo.attach(BASEMENT_MOTOR);  // set 8 as servo pin
+        basementServo.attach(BASEMENT_MOTOR);  // set servo pin
         delay(100);
         for (basementPos = 178; basementPos > 0; basementPos -= 1)
         {
           basementServo.write(basementPos);
           delay(30);
         }                          
-        basementServo.detach();  // set 8 as servo pin, maybe not detach, TRY IT
+        basementServo.detach();  // set servo pin
         delay(100);
         
         delay(10000);
