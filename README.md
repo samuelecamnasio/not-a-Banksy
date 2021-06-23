@@ -28,6 +28,12 @@ Maximiliano Romero , Design department, IUAV, Venice University
 
 Rohan Vangal
 
+### Final robot videos:
+
+https://youtu.be/PB26VNrjWMA
+
+https://youtu.be/j3hokL9urlc
+
 
 
 Code for the Robotics and design course, the final code for the working robot is in the 'firmware' folder, in the other folder can be found a series of sketches used to test the working of the single components, in particular:
