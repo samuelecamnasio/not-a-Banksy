@@ -28,6 +28,10 @@ Maximiliano Romero , Design department, IUAV, Venice University
 
 Rohan Vangal
 
+### Final robot and development report:
+
+https://drive.google.com/file/d/1nuCEC1t9RFfXffJ18gsWojv1rdMC6Zwj/view?usp=sharing
+
 ### Final robot videos:
 
 https://youtu.be/PB26VNrjWMA
