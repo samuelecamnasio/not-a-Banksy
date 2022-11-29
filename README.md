@@ -3,6 +3,8 @@
 ## Interdisciplinary course of Design and Robotics
 9° edition, 2021
 
+![alt text](https://github.com/samuelecamnasio/not-a-Banksy/blob/main/not-a-Banksy.png?raw=true)
+
 ---
 Laura Bonitta, school of Design
 
